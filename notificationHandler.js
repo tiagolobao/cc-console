@@ -7,10 +7,10 @@ class NotificationHandler{
 
     // POSITION variable type
     static POSITION = {
-        UPLEFT    : 1,
-        UPRIGHT   : 2,
-        DOWNLEFT  : 3,
-        DOWNRIGHT : 4,
+        UPLEFT    : 0b11,
+        UPRIGHT   : 0b10,
+        DOWNLEFT  : 0b01,
+        DOWNRIGHT : 0b00,
     };
 
     // NOTIFICATION_TYPE variable type
@@ -19,15 +19,36 @@ class NotificationHandler{
         WARNING : 2,
         ERROR   : 3,
     }
+    
+    // Notification interface generator
+    ui(pos){ 
+        const flexDirection = (pos & 0b01 ? 'flex-end' : 'flex-start');
+        return `
+        <div 
+            id="notificationUi"
+            style="
+                display:flex;
+                flex-direction: column;
+                align-items: ${flexDirection};
+                margin: 5px;
+            ">
+            <!-- Balloons will be added here -->
+        </div>
+        `;
+    }
 
     /**
      * Init variables and notification interface
      * @param {POSITION} pos indicates where the notification will appear
      * @param {Object} timeouts specifies the time for each NOTIFICATION_TYPE
+     * @param {HTMLElement} elem node to be appended the notifications
      */
-    constructor(pos,timeouts){
+    constructor(pos,timeouts,elem){
         this.pos = pos;
         this.timeouts = timeouts;
+
+        elem.insertAdjacentHTML('beforeend',ui);
+        this.uiElem = elem.getElementById('notificationUi');
     }
 
     /**
