@@ -97,31 +97,21 @@ class PseudoConsole{
     }
 
     /**
-     * @brief getter for windowStatus
-     * @public
-     */
-    getWindowStatus(){
-
-    }
-
-    /**
-     * @brief Shows or hides the console window
+     * @brief Shows or hides the console window. Change the windowStatus,
+     * activating or deactivating notifications
      * @public
      */
     toggle(){
-        if( 'none' == this.uiElem.style.display ) {
-            this.uiElem.style.display = 'flex';
-        } else {
-            this.uiElem.style.display = 'none';
+        switch (this.windowStatus) {
+            case PseudoConsole.WINDOW_STATUS.CLOSED:
+                this.windowStatus = PseudoConsole.WINDOW_STATUS.OPENED;
+                this.uiElem.style.display = 'flex';   
+                break;
+            case PseudoConsole.WINDOW_STATUS.OPENED:
+                this.windowStatus = PseudoConsole.WINDOW_STATUS.CLOSED;
+                this.uiElem.style.display = 'none';
+                break;
         }
-    }
-
-    /**
-     * @brief Clears all messages on the console window
-     * @private
-     */
-    _clear(){
-
     }
 
     /**
@@ -140,7 +130,9 @@ class PseudoConsole{
      * @private
      */
     _appendConsoleMessage(msg,type){
-        let color, icon;
+        
+        // Append to the console 
+        let icon;
         switch(type){
             case PseudoConsole.MSG_TYPE.LOG:
                 icon = '';
@@ -159,6 +151,11 @@ class PseudoConsole{
                 margin: 0px 0px 10px 0px;
             "> > ${icon} ${msg.toString()} </ul>
         `);
+
+        // Notification
+        if(PseudoConsole.WINDOW_STATUS.CLOSED == this.windowStatus){
+                   
+        }
     }
 
     /**
