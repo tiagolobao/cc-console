@@ -45,15 +45,27 @@ class PseudoConsole{
         this.keyBinding = keyBinding;
         this.windowStatus = PseudoConsole.WINDOW_STATUS.CLOSED;
 
+        // appending new UI
         this.ids = {
             ui: 'u_ccconsole',
             window: 'w_ccconsole',
             header: 'h_ccconsole',
+            closeBtn: 'h_closeBtn',
+            cleanBtn: 'h_cleanBtn',
+            sizeBtn: 'h_sizeBtn',
         };
-
         this.uiElem = this._generateUi(elem, this.ids, theme);
         this.windowElem = this.uiElem.querySelector('#'+this.ids.window);
         this.headerElem = this.uiElem.querySelector('#'+this.ids.header);
+
+        // close button handler
+        this.headerElem.querySelector('#'+this.ids.closeBtn).addEventListener('click',(e) => {
+            e.target.closest('#'+this.ids.ui).style.display = 'none';
+        });
+        // clear button handler
+        this.headerElem.querySelector('#'+this.ids.cleanBtn).addEventListener('click',(e) => {
+            e.target.closest('#'+this.ids.ui).querySelector('#'+this.ids.window).innerHTML = '';
+        });
     }
 
     /**
@@ -192,7 +204,7 @@ class PseudoConsole{
                     z-index: 1;
             ">
                 <button 
-                    id="closeBtn"
+                    id="${ids.closeBtn}"
                     type="button"
                     style="
                         background-color: #ff5555;
@@ -206,7 +218,7 @@ class PseudoConsole{
                         color: white;
                 "></button> 
                 <button
-                    id="clearBtn"
+                    id="${ids.cleanBtn}"
                     type="button"
                     style="
                         background-color: #f1fa8c;
@@ -218,7 +230,7 @@ class PseudoConsole{
                         color: white;
                     "></button> 
                 <button
-                    id="sizeBtn"
+                    id="${ids.sizeBtn}"
                     type="button"
                     style="
                         background-color: #333;
