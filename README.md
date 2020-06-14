@@ -6,8 +6,8 @@ Console Mod for CrossCode (In progress)
 
 Checklist
 - [x] Display messages in a UI overlay    
-- [ ] Implement clear and close buttons
-- [ ] Toggle with F12
+- [x] Implement clear and close buttons
+- [x] Toggle with some key
 - [ ] Notifications for new logs
 - [ ] Log File for uncaughtException and unhandledRejections
 - [ ] Overwrite the console object

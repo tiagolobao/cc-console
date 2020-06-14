@@ -31,6 +31,7 @@ class PseudoConsole{
         ERR: 2,
     }
 
+
     /**
      * Init variables and console interface
      * @param {THEME} theme which theme should be used
@@ -105,9 +106,9 @@ class PseudoConsole{
 
     /**
      * @brief Shows or hides the console window
-     * @private
+     * @public
      */
-    _toggle(){
+    toggle(){
         if( 'none' == this.uiElem.style.display ) {
             this.uiElem.style.display = 'flex';
         } else {
@@ -144,7 +145,7 @@ class PseudoConsole{
             case PseudoConsole.MSG_TYPE.LOG:
                 icon = '';
                 break;
-            case PseudoConsole.MSG_TYPE.WAR:
+                case PseudoConsole.MSG_TYPE.WAR:
                 icon = `<span style="color: #f1fa8c">Warning:</span>`;
                 break;
             case PseudoConsole.MSG_TYPE.ERR:

@@ -14,7 +14,7 @@ let con = {
     POSITION: NotificationHandler.POSITION.DOWNRIGHT,
     LOGFILE_LEVEL: PseudoConsole.LOG_LEVEL.UNCAUGHT,
     THEME: 14,
-    TOGGLE_KEY: 80, // "p" KEY
+    TOGGLE_KEY: 'p',
     MAX_LOGS: 1024,
     TIMEOUTS: {
         error: 15,
@@ -35,6 +35,14 @@ con.pc = new PseudoConsole(
     con.TOGGLE_KEY,
     con.ELEM,
 );
+
+// TODO: put this inside the PseudoConsole class
+jQuery(document).keypress(function(e) {
+    if(con.TOGGLE_KEY == e.key){
+        con.pc.toggle();
+    }
+});
+
 con.pc.log('my first message');
 con.pc.warn('my first warning');
 con.pc.error('my first error');
